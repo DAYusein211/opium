@@ -12,7 +12,7 @@ Game::Game(int width, int height, const char* title)
 
 void Game::Run()
 {
-
+	
 	while (!WindowShouldClose())
 	{
 		BeginDrawing();
