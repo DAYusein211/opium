@@ -1,4 +1,4 @@
 #include <iostream>
 #include <raylib.h>
-#include "Run.hpp"
+#include "Game.hpp"
 #include "Renderer.hpp"

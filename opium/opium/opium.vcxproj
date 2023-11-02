@@ -134,13 +134,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Run.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Renderer.hpp" />
     <ClInclude Include="pch.hpp" />
-    <ClInclude Include="Run.hpp" />
+    <ClInclude Include="Game.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
