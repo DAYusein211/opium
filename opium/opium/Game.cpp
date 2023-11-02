@@ -11,17 +11,20 @@ Game::Game(int width, int height, const char* title)
 void Game::Run()
 {
 
-	Texture2D room = LoadTexture("../assets/noshadowroom.png");
-	Texture2D shadows = LoadTexture("../assets/shadows.png");
-	room.width = 1600;
-	room.height = 900;
-	shadows.width = 1600;
-	shadows.height = 900;
+	Render room, shadows;
+	room.texture = LoadTexture("../assets/noshadowroom.png");
+	shadows.texture = LoadTexture("../assets/shadows.png");
+	room.texture.width = 1600;
+	room.texture.height = 900;
+	shadows.texture.width = 1600;
+	shadows.texture.height = 900;
 	while (!WindowShouldClose())
 	{
 		BeginDrawing();
-		DrawTexture(room, 0, 0, WHITE);
-		DrawTexture(shadows, 0, 0, WHITE);
+		
+
+		room.Draw();
+		shadows.Draw();
 		EndDrawing();
 	}
 
