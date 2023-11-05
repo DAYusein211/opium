@@ -1,8 +1,7 @@
 class Render
 {
 public:
-	Texture2D texture;
+	void InitialiseTextures();
 	void Draw();
-	void DrawStand(int x,int y);
-	void DrawPotion(int x, int y);
+	void UnloadTextures();
 };
