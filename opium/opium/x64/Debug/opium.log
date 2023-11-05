@@ -1,2 +1,36 @@
 ﻿  InputHandler.cpp
+  Renderer.cpp
+C:\Users\alide\OneDrive\Documents\project\opium\opium\opium\Renderer.cpp(26,79): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\alide\OneDrive\Documents\project\opium\opium\opium\Renderer.cpp(29,112): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\project\opium\opium\opium\Renderer.cpp(29,76): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  main.cpp
+  Game.cpp
+  Textures.cpp
+  Generating Code...
+raylib.lib(rcore.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(rcore.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(rshapes.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(rshapes.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(rtextures.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(rtextures.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(utils.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(utils.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(rtext.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(rtext.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(init.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(init.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(monitor.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(monitor.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(window.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(window.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(input.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(input.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(context.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(context.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(win32_window.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(win32_window.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(win32_time.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(win32_time.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(win32_thread.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(win32_thread.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(platform.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(platform.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(vulkan.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(vulkan.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(win32_init.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(win32_init.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(win32_monitor.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(win32_monitor.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(wgl_context.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(wgl_context.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(egl_context.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(egl_context.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(osmesa_context.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(osmesa_context.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(win32_module.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(win32_module.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(win32_joystick.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(win32_joystick.c.obj)' or at ''; linking object as if no debug info
   opium.vcxproj -> C:\Users\alide\OneDrive\Documents\project\opium\opium\x64\Debug\opium.exe

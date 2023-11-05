@@ -1,6 +1,5 @@
 class InputHandler
 {
 public:
-	void DragAndDrop();
-	void Update();
+	void DragAndDrop(float& flaskPositionX, float& flaskPositionY, Vector2 firstPosition);
 };

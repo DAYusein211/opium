@@ -2,27 +2,29 @@
 
 namespace test
 {
-	Textures* textures = new Textures;
+	Textures* texture = new Textures;
 	Vector2 mouse;
-	
+	bool isDragActive = false;
 }
-void InputHandler::Update()
+void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY, Vector2 firstPosition)
 {
-	test::mouse = GetMousePosition();
-	for (int i = 0; i < 10; i++)
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+			test::isDragActive = true;
+
+	if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 	{
-		if (CheckCollisionPointRec(test::mouse, { 0, test::textures->flaskPositionY, 200, 100 }))
-		{
-			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-			{
-				test::textures->flaskPositionX[i] = test::mouse.x;
-				test::textures->flaskPositionY = test::mouse.y;
-			}
-		}
+
+		test::isDragActive = false;
+
+		flaskPositionX = firstPosition.x;
+		flaskPositionY = firstPosition.y;
+	}
+
+	if (test::isDragActive)
+	{
+		flaskPositionX = GetMousePosition().x - 10;
+		flaskPositionY = GetMousePosition().y - 30;
 	}
 }
 
-void InputHandler::DragAndDrop()
-{
 
-}
