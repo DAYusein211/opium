@@ -4,9 +4,10 @@ void Textures::SetSize(Texture2D* texture, int height, int width)
 	texture->height = height;
 	texture->width = width;
 }
-std::string Textures::GetDirectory(int number)
+std::string Textures::GetDirectory(int number, std::string object)
 {
-	std::string dir = "../assets/flask" + std::to_string(number) + ".png";
+	
+	std::string dir = "../assets/" + object + std::to_string(number) + ".png";
 	return dir;
 }
 
@@ -14,19 +15,23 @@ std::string Textures::GetDirectory(int number)
 void Textures::InitialiseTextures()
 {
 	float flaskPosX = 660, HolderPosX = 650;
-
+	Texture2D flask, page;
 	room = LoadTexture("../assets/room.png");
 	shadows = LoadTexture("../assets/shadows.png");
 	flaskHolder = LoadTexture("../assets/stoika.png");
+	book = LoadTexture("../assets/book.png");
 	SetSize(&flaskHolder , 125, 225);
-
+	SetSize(&book, 100, 120);
 	SetSize(&room, 900, 1600);
 	SetSize(&shadows, 900, 1600);
 
 	for (int i = 0; i < 10; i++)
 	{
-		flask = LoadTexture(Textures::GetDirectory(i+1).c_str());
+		flask = LoadTexture(Textures::GetDirectory(i+1, "flask").c_str());
+		page = LoadTexture(Textures::GetDirectory(i + 1, "page").c_str());
 		flasks.push_back(flask);
+		pages.push_back(page);
+
 		flaskPositionX[i] = flaskPosX;
 
 		firstPosition[i] = { flaskPosX, 625 };
@@ -45,6 +50,11 @@ void Textures::InitialiseTextures()
 		HolderPositionX.push_back(HolderPosX);
 		HolderPosX += 250;
 	}
+}
+
+void Textures::BookOpened(int index)
+{
+		DrawTexture(pages[index], 100, 100, WHITE);
 }
 
 Textures::~Textures()
