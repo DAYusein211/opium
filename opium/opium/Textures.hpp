@@ -2,7 +2,7 @@
 class Textures
 {
 public:
-	Texture2D flaskHolder, book, room, shadows;
+	Texture2D flaskHolder, book, room, shadows, bowl;
 	std::vector<Texture2D> flasks, pages;
 	float flaskPositionX[10];
 	std::vector<float> HolderPositionX;

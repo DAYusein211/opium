@@ -26,7 +26,7 @@ void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY, Vec
 		flaskPositionY = firstPosition.y;
 		isEquipped = false;
 	}
-	if (CheckCollisionPointRec(GetMousePosition(), { 100, 100, 100, 100 }) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+	if (CheckCollisionPointRec(GetMousePosition(), { 660, 740, 200, 400 }) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 		isOnBowl = true;
 	else
 		isOnBowl = false;

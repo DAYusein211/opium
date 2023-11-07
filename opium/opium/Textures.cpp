@@ -20,11 +20,12 @@ void Textures::InitialiseTextures()
 	shadows = LoadTexture("../assets/shadows.png");
 	flaskHolder = LoadTexture("../assets/stoika.png");
 	book = LoadTexture("../assets/book.png");
+	bowl = LoadTexture("../assets/bowl.png");
 	SetSize(&flaskHolder , 125, 225);
 	SetSize(&book, 100, 120);
 	SetSize(&room, 900, 1600);
 	SetSize(&shadows, 900, 1600);
-
+	SetSize(&bowl, 200, 400);
 	for (int i = 0; i < 10; i++)
 	{
 		flask = LoadTexture(Textures::GetDirectory(i+1, "flask").c_str());
@@ -62,7 +63,7 @@ Textures::~Textures()
 	UnloadTexture(room);
 	UnloadTexture(shadows);
 	UnloadTexture(flaskHolder);
-
+	UnloadTexture(bowl);
 	for (auto i = flasks.begin(); i != flasks.end(); i++)
 		UnloadTexture(*i);
 
