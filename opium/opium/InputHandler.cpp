@@ -6,7 +6,7 @@ namespace test
 	Vector2 mouse;
 	bool isDragActive = false;
 }
-void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY, Vector2 firstPosition,bool &isEquipped)
+void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY, Vector2 firstPosition,bool &isEquipped, bool &isOnBowl)
 {
 	if (CheckCollisionPointRec(GetMousePosition(), { flaskPositionX, flaskPositionY, 25, 50 }) && !isEquipped)
 	{
@@ -18,6 +18,7 @@ void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY, Vec
 	}
 	if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 	{
+		
 
 		test::isDragActive = false;
 
@@ -25,7 +26,10 @@ void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY, Vec
 		flaskPositionY = firstPosition.y;
 		isEquipped = false;
 	}
-
+	if (CheckCollisionPointRec(GetMousePosition(), { 100, 100, 100, 100 }) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		isOnBowl = true;
+	else
+		isOnBowl = false;
 	if (test::isDragActive)
 	{
 		flaskPositionX = GetMousePosition().x - 10;

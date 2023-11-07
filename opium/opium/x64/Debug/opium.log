@@ -1,11 +1,2 @@
-﻿  Renderer.cpp
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(34,79): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
-          with
-          [
-              _Ty=float
-          ]
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(37,112): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(37,76): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(40,144): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(40,97): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  opium.vcxproj -> C:\Users\GoGo\opium\opium\x64\Debug\opium.exe
+﻿  InputHandler.cpp
+  opium.vcxproj -> C:\Users\alide\OneDrive\Documents\School\opium\opium\x64\Debug\opium.exe

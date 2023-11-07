@@ -14,20 +14,17 @@ void Game::Run()
 
 	renderer->InitialiseTextures();
 
-	
 	while (!WindowShouldClose())
 	{
 		
-
 		BeginDrawing();
 
 		renderer->Draw();
+		
 		EndDrawing();
 	}
-
 }
 Game::~Game()
 {	
-
 	CloseWindow();
 }

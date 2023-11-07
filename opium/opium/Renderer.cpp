@@ -5,9 +5,10 @@ namespace opium
 	Textures* textures = new Textures;
 	InputHandler* input = new InputHandler;
 	Color flaskColor, bookColor;
-	bool isUpdated = false, isEquipped = false, isBookOpened = false;
+	bool isUpdated = false, isEquipped = false, isBookOpened = false, isOnBowl = false;
 	int index;
 	int pageIndex = 0; 
+	Color color[10] = { {255,0,0, 255}, {0,255,0, 255}, {0,0,255, 255}, {0,0,0, 255}, {0,0,0, 255}, {0,0,0, 255}, {0,0,0, 255}, {0,0,0, 255}, {0,0,0, 255}, {0,0,0, 255} }, bowlColor = RED;
 	Vector2 center = { (GetScreenWidth() + 500) / 2.0f, (GetScreenHeight() + 400) / 2.0f };
 }
 	
@@ -20,13 +21,14 @@ void Render::Draw()
 	for (int i = 0; i < 10; i++)
 		if (CheckCollisionPointRec(GetMousePosition(), { opium::textures->flaskPositionX[i], opium::textures->flaskPositionY[i], 25, 50 }) && !opium::isEquipped)
 			opium::index = i;
-
-	opium::input->DragAndDrop(opium::textures->flaskPositionX[opium::index], opium::textures->flaskPositionY[opium::index],opium::textures->firstPosition[opium::index], opium::isEquipped);
-
-
 	DrawTexture(opium::textures->room, 0, 0, WHITE);
+	DrawRectangle(100, 100, 100, 100, BLUE);
 
-	DrawCircleSector(opium::center, 180.0f, 270.0f, 450.0f, (int)20.0f, RED);
+	opium::input->DragAndDrop(opium::textures->flaskPositionX[opium::index], opium::textures->flaskPositionY[opium::index], opium::textures->firstPosition[opium::index], opium::isEquipped, opium::isOnBowl);
+	if (opium::isOnBowl && CheckCollisionPointRec(GetMousePosition(), { 100, 100, 100, 100 }))
+		opium::bowlColor = opium::color[opium::index];
+
+	DrawCircleSector(opium::center, 180.0f, 270.0f, 450.0f, (int)20.0f, opium::bowlColor);
 
 
 
