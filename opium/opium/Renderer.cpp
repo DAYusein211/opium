@@ -8,6 +8,7 @@ namespace opium
 	bool isUpdated = false, isEquipped = false, isBookOpened = false;
 	int index;
 	int pageIndex = 0; 
+	Vector2 center = { (GetScreenWidth() + 500) / 2.0f, (GetScreenHeight() + 400) / 2.0f };
 }
 	
 void Render::InitialiseTextures()
@@ -22,7 +23,12 @@ void Render::Draw()
 
 	opium::input->DragAndDrop(opium::textures->flaskPositionX[opium::index], opium::textures->flaskPositionY[opium::index],opium::textures->firstPosition[opium::index], opium::isEquipped);
 
+
 	DrawTexture(opium::textures->room, 0, 0, WHITE);
+
+	DrawCircleSector(opium::center, 180.0f, 270.0f, 450.0f, (int)20.0f, RED);
+
+
 
 	for (int i = 0; i < 2; i++)
 		DrawTexture(opium::textures->flaskHolder, opium::textures->HolderPositionX[i], 600, WHITE);

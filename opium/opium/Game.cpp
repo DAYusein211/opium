@@ -12,7 +12,6 @@ void Game::Run()
 {
 	Render* renderer = new Render;
 
-
 	renderer->InitialiseTextures();
 
 	
@@ -22,9 +21,7 @@ void Game::Run()
 
 		BeginDrawing();
 
-		
 		renderer->Draw();
-		
 		EndDrawing();
 	}
 
