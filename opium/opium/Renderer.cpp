@@ -5,10 +5,10 @@ namespace opium
 	Textures* textures = new Textures;
 	InputHandler* input = new InputHandler;
 	Color flaskColor, bookColor;
-	bool isUpdated = false, isEquipped = false, isBookOpened = false, isOnBowl = false;
+	bool isUpdated = false, isEquipped = false, isBookOpened = false, isOnBowl = false, isDragActive = false;
 	int index;
 	int pageIndex = 0; 
-	Color color[10] = { {255,0,0, 255}, {0,255,0, 255}, {0,0,255, 255}, {0,0,0, 255}, {0,0,0, 255}, {0,0,0, 255}, {0,0,0, 255}, {0,0,0, 255}, {0,0,0, 255}, {0,0,0, 255} }, bowlColor = RED;
+	Color color[10] = { {223, 257, 7}, {228, 73, 179}, {74, 139, 255}, {86, 223, 13}, {209, 16, 64}, {44, 191, 147}, {78, 66, 114}, {191, 191, 191}, {145, 214, 180}, {228, 145, 89} }, bowlColor = WHITE;
 	Vector2 center = { 759, 806 };
 }
 	
@@ -24,8 +24,22 @@ void Render::Draw()
 	DrawTexture(opium::textures->room, 0, 0, WHITE);
 
 	opium::input->DragAndDrop(opium::textures->flaskPositionX[opium::index], opium::textures->flaskPositionY[opium::index], opium::textures->firstPosition[opium::index], opium::isEquipped, opium::isOnBowl);
-	if (opium::isOnBowl && CheckCollisionPointRec(GetMousePosition(), { 660, 740, 200, 400 }))
-		opium::bowlColor = opium::color[opium::index];
+	
+	if (CheckCollisionPointRec(GetMousePosition(), { opium:: textures->flaskPositionX[opium::index], opium::textures->flaskPositionY[opium::index] , 25, 50}))
+	{
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			opium::isDragActive = true;
+		}
+	}
+
+	if (opium::isOnBowl && opium::isDragActive&& CheckCollisionPointRec(GetMousePosition(), { 660, 740, 200, 400 }))
+	{
+		opium::bowlColor.r = 255 - (sqrt(pow((255 - (opium::bowlColor.r)), 2) + pow((255 - (opium::color[opium::index].r)), 2) / 2));
+		opium::bowlColor.g = 255 - (sqrt(pow((255 - (opium::bowlColor.g)), 2) + pow((255 - (opium::color[opium::index].g)), 2) / 2));
+		opium::bowlColor.b = 255 - (sqrt(pow((255 - (opium::bowlColor.b)), 2) + pow((255 - (opium::color[opium::index].b)), 2) / 2));
+		opium::isDragActive = false;
+	}
 
 	DrawCircleSector(opium::center, 81.0f, 270.0f, 450.0f, (int)20.0f, opium::bowlColor);
 
