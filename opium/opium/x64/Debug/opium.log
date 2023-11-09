@@ -1,17 +1,14 @@
 ﻿  Renderer.cpp
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(11,28): warning C4838: conversion from 'int' to 'unsigned char' requires a narrowing conversion
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(11,28): warning C4305: 'initializing': truncation from 'int' to 'unsigned char'
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(11,28): warning C4309: 'initializing': truncation of constant value
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(38,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(39,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(40,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(50,79): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(53,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(54,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(55,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(65,79): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(53,112): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(53,76): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(56,144): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GoGo\opium\opium\opium\Renderer.cpp(56,97): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  opium.vcxproj -> C:\Users\GoGo\opium\opium\x64\Debug\opium.exe
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(68,112): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(68,76): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(71,144): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(71,97): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  opium.vcxproj -> C:\Users\alide\OneDrive\Documents\School\opium\opium\x64\Debug\opium.exe

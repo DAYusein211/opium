@@ -7,7 +7,10 @@ Game::Game(int width, int height, const char* title)
 	SetTargetFPS(60);
 };
 
-
+namespace run
+{
+	bool isPlayOn = false, exit = false, isWindowClosed = false;
+}
 
 void Game::Run()
 {
@@ -15,15 +18,21 @@ void Game::Run()
 
 	renderer->InitialiseTextures();
 
-	while (!WindowShouldClose())
+	while (!run::isWindowClosed)
 	{
 		
 		BeginDrawing();
-
-		renderer->Draw();
+		if (!run::isPlayOn)
+			renderer->MainMenu(run::isPlayOn, run::exit);
+		if(run::isPlayOn)
+			renderer->Draw();
+		if (run::exit || WindowShouldClose())
+			run::isWindowClosed = true;
 		
 		EndDrawing();
+		
 	}
+	
 }
 Game::~Game()
 {	

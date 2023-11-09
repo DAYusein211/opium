@@ -6,7 +6,7 @@ namespace test
 	Vector2 mouse;
 	bool isDragActive = false;
 }
-void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY, Vector2 firstPosition,bool &isEquipped, bool &isOnBowl)
+void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY, Vector2 firstPosition,bool &isEquipped, bool &isOnBowl, int& mixCount)
 {
 	if (CheckCollisionPointRec(GetMousePosition(), { flaskPositionX, flaskPositionY, 25, 50 }) && !isEquipped)
 	{
@@ -27,7 +27,10 @@ void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY, Vec
 		isEquipped = false;
 	}
 	if (CheckCollisionPointRec(GetMousePosition(), { 660, 740, 200, 400 }) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+	{
 		isOnBowl = true;
+		mixCount++;
+	}
 	else
 		isOnBowl = false;
 	if (test::isDragActive)
