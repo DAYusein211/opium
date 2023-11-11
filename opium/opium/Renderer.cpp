@@ -2,6 +2,10 @@
 
 namespace core
 {
+	std::string text = "";
+	int letterIndex = 0;
+	float delay = 0;
+	char stats[100] = "Subject has contained cancer";
 	std::vector<int>indexes;
 	Textures* textures = new Textures;
 	InputHandler* input = new InputHandler;
@@ -14,7 +18,8 @@ namespace core
 	Vector2 center = { 759, 806 };
 	
 }
-	
+
+
 void Render::MainMenu(bool& isPlayOn, bool& exit)
 {
 	core::buttonFrame = { 0,0,(float)core::textures->playButton.width / 2, 50 };
@@ -39,6 +44,25 @@ void Render::InitialiseTextures()
 {
 	core::textures->InitialiseTextures();
 }
+
+			
+void Render::SubjectStats(std::string stats)
+{
+	
+	
+	DrawRectangle(200, 200, 400, 100, BLACK);
+
+	core::delay += GetFrameTime();
+	
+	if (core::delay > .1f && core::letterIndex < stats.size())
+	{
+		core::delay = 0.0f;
+		core::text += stats[core::letterIndex];
+		core::letterIndex++;
+
+	}
+	DrawText(core::text.c_str(), 220, 220, 20, WHITE);
+}
 void Render::Draw()
 {
 
@@ -48,6 +72,8 @@ void Render::Draw()
 	DrawTexture(core::textures->room, 0, 0, WHITE);
 	if (core::isOnBowl && core::mixCount <= 2)
 	{
+		//Sets bowl's color to be a mixture of 2 flasks colors'
+
 		core::bowlColor.a = 255;
 		core::bowlColor.r = 255 - (sqrt(pow((255 - (core::bowlColor.r)), 2) + pow((255 - (core::color[core::index].r)), 2) / 2));
 		core::bowlColor.g = 255 - (sqrt(pow((255 - (core::bowlColor.g)), 2) + pow((255 - (core::color[core::index].g)), 2) / 2));
@@ -87,7 +113,7 @@ void Render::Draw()
 	DrawTexture(core::textures->book, 450, 685, core::bookColor);
 
 	DrawTexture(core::textures->shadows, 0, 0, WHITE);
-
+	SubjectStats(core::stats);
 	DrawRectangle(100, 100, 100, 100, BLUE);
 	
 

@@ -66,10 +66,12 @@ void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY,Text
 Color InputHandler::getColor(float posX, float posY)
 {
 	Color color = GRAY;
+
 	if (CheckCollisionPointRec(GetMousePosition(), { posX, posY, 100, 120 }))
 		color = WHITE;
 	else
 		color = GRAY;
+
 	return color;
 }
 
