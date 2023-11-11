@@ -56,7 +56,7 @@ void Textures::InitialiseTextures()
 
 void Textures::BookOpened(int index)
 {
-		DrawTexture(pages[index], 100, 100, WHITE);
+	DrawTexture(pages[index], 100, 100, WHITE);
 }
 
 void Textures::RemoveFlask(int index)

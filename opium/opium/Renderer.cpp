@@ -9,14 +9,26 @@ namespace core
 	std::vector<int>indexes;
 	Textures* textures = new Textures;
 	InputHandler* input = new InputHandler;
-	Color flaskColor, bookColor;
+	Color flaskColor, bookColor, fade;
 	Rectangle buttonFrame;
-	bool  isDropped = true, isUpdated = false, isEquipped = false, isBookOpened = false, isOnBowl = false;
+	bool  switchTransition = false, isDropped = true, isUpdated = false, isEquipped = false, isBookOpened = false, isOnBowl = false;
 	int index, mixCount = 0;
 	int pageIndex = 0; 
-	Color color[10] = { {223, 255, 7, 255}, {228, 73, 179, 255}, {74, 139, 255, 255}, {86, 223, 13, 255}, {209, 16, 64, 255}, {44, 191, 147, 255}, {78, 66, 114, 255}, {191, 191, 191, 255}, {145, 214, 180, 255}, {228, 145, 89, 255} }, bowlColor = {255, 255, 255, 0};
+	Color color[10] = { {223, 255, 7, 255}, {228, 73, 179, 255}, {74, 139, 255, 255}, {86, 223, 13, 255}, {209, 16, 64, 255}, {44, 191, 147, 255}, {78, 66, 114, 255}, {191, 191, 191, 255}, {145, 214, 180, 255}, {228, 145, 89, 255} }, bowlColor = { 255, 255, 255, 0 };
 	Vector2 center = { 759, 806 };
 	
+}
+
+void Render::FadeOut(Color& fadeOut, bool& isOver)
+{
+	if (fadeOut.a >= 4)
+		fadeOut.a -= 4;
+	
+	if (fadeOut.a == 0)
+		isOver = true;
+
+	DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), fadeOut);
+
 }
 
 
@@ -26,7 +38,8 @@ void Render::MainMenu(bool& isPlayOn, bool& exit)
 	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2 - 100,(float)GetScreenHeight() / 2, 100, 50, }))
 		core::buttonFrame.x = 100;
 
-	DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
+	DrawTexture(core::textures->room, 0, 0, WHITE);
+	DrawTexture(core::textures->shadows, 0, 0, WHITE);
 	DrawTextureRec(core::textures->playButton, core::buttonFrame, {(float)GetScreenWidth()/2 - 100,(float)GetScreenHeight()/2}, WHITE);
 	DrawRectangle(GetScreenWidth() / 2, GetScreenHeight() / 2 + 100, 200, 50, BLUE);
 	DrawText("Exit", GetScreenWidth() / 2, GetScreenHeight() / 2 + 100, 20, WHITE);
@@ -34,6 +47,7 @@ void Render::MainMenu(bool& isPlayOn, bool& exit)
 	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2 - 100,(float)GetScreenHeight() / 2, 300, 100, }))
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 			isPlayOn = true;
+
 
 	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2,(float)GetScreenHeight() / 2 + 100, 200, 50, }))
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
@@ -65,7 +79,6 @@ void Render::SubjectStats(std::string stats)
 }
 void Render::Draw()
 {
-
 	for (int i = 0; i < 10; i++)
 		if (CheckCollisionPointRec(GetMousePosition(), { core::textures->flaskPositionX[i], core::textures->flaskPositionY[i], 25, 50 }) && !core::isEquipped && core::isDropped)
 			core::index = i;

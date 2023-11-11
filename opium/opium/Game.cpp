@@ -9,7 +9,8 @@ Game::Game(int width, int height, const char* title)
 
 namespace run
 {
-	bool isPlayOn = false, exit = false, isWindowClosed = false;
+	bool isPlayOn = false, exit = false, isWindowClosed = false, fadeOutOver = false;
+	Color fadeOut = { 0,0,0, 255 };
 }
 
 void Game::Run()
@@ -25,7 +26,13 @@ void Game::Run()
 		if (!run::isPlayOn)
 			renderer->MainMenu(run::isPlayOn, run::exit);
 		else
-			renderer->Draw();
+		{
+
+				renderer->Draw();
+			renderer->FadeOut(run::fadeOut, run::fadeOutOver);
+			
+			
+		}
 
 		if (run::exit || WindowShouldClose())
 			run::isWindowClosed = true;
