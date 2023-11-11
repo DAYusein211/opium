@@ -15,24 +15,25 @@ namespace run
 void Game::Run()
 {
 	Render* renderer = new Render;
-
+	
 	renderer->InitialiseTextures();
 
 	while (!run::isWindowClosed)
 	{
-		
 		BeginDrawing();
+
 		if (!run::isPlayOn)
 			renderer->MainMenu(run::isPlayOn, run::exit);
-		if(run::isPlayOn)
+		else
 			renderer->Draw();
+
 		if (run::exit || WindowShouldClose())
 			run::isWindowClosed = true;
 		
 		EndDrawing();
 		
 	}
-	
+	renderer->UnloadTextures();
 }
 Game::~Game()
 {	

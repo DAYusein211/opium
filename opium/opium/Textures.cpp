@@ -21,6 +21,7 @@ void Textures::InitialiseTextures()
 	flaskHolder = LoadTexture("../assets/stoika.png");
 	book = LoadTexture("../assets/book.png");
 	bowl = LoadTexture("../assets/bowl.png");
+	playButton = LoadTexture("../assets/playButton.png");
 	SetSize(&flaskHolder , 125, 225);
 	SetSize(&book, 100, 120);
 	SetSize(&room, 900, 1600);
@@ -56,6 +57,18 @@ void Textures::InitialiseTextures()
 void Textures::BookOpened(int index)
 {
 		DrawTexture(pages[index], 100, 100, WHITE);
+}
+
+void Textures::RemoveFlask(int index)
+{
+	flasks[index].height = 0;
+	flasks[index].width = 0;
+}
+
+void Textures::RestoreFlask(int index)
+{
+	flasks[index].height = 55;
+	flasks[index].width = 19;
 }
 
 Textures::~Textures()
