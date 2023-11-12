@@ -1,3 +1,6 @@
+#include "pch.hpp"
+#include "Renderer.hpp"
+
 class Game
 {
 public:

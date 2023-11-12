@@ -1,3 +1,4 @@
+#include "pch.hpp"
 class InputHandler
 {
 public:

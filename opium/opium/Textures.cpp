@@ -1,4 +1,6 @@
-#include "pch.hpp"
+
+#include "Textures.hpp"
+
 void Textures::SetSize(Texture2D& texture, int height, int width)
 {
 	texture.height = height;

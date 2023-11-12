@@ -1,5 +1,5 @@
-#include "pch.hpp"
 
+#include "Game.hpp"
 
 Game::Game(int width, int height, const char* title)
 {
@@ -15,7 +15,7 @@ namespace run
 
 void Game::Run()
 {
-	Render* renderer = new Render;
+	Render* renderer = new Render();
 	
 	renderer->InitialiseTextures();
 

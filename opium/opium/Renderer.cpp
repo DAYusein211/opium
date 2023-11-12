@@ -1,31 +1,32 @@
-#include "pch.hpp"
 
-namespace core
+#include "Renderer.hpp"
+Render::Render()
 {
-	std::string text = "";
-	int letterIndex = 0;
-	float delay = 0, frameTime = 0;
-	char stats[100] = "Subject has contained cancer";
-	std::vector<int>indexes;
-	Textures* textures = new Textures;
-	InputHandler* input = new InputHandler;
-	Color flaskColor, bookColor, fade;
+	text = "";
+	letterIndex = 0;
+	delay = 0;
+	frameTime = 0;
+	stats = "Subject has contained cancer";
+	textures = new Textures;
+	input = new InputHandler;
+	isPossible = false;
+	switchTransition = false;
+	isDropped = true;
+	isWritten = true;
+	isUpdated = false;
+	isEquipped = false;
+	isBookOpened = false;
+	isOnBowl = false;
+	mixCount = 0;
+	switchFrame = 0;
+	pageIndex = 0;
+	reactionIndex = 0;
+	chemicalCompounds = { "","","H2O","","","Cr(OH3)","","","","" };
 	
-	bool isPreviousPossible = false, isPossible = false, switchTransition = false, isDropped = true, isUpdated = false, isEquipped = false, isBookOpened = false, isOnBowl = false;
-	int index, mixCount = 0, switchFrame = 0;
-	int pageIndex = 0, reactionIndex = 0;
-	std::vector<std::string> chemicalCompounds{"","","H2O","","","Cr(OH3)","","","",""};
-	std::vector <std::string> chemicalReactions;
-	std::string possibleChemicalReactions[5][2] =
-	{ {"Cr(OH)3", "H2O"},
-	  {"Na", "H2O"},
-	  {"ad", "da"},
-	  {"wwg","gwwg"},
-	  {"qwwqwq", "gtgtgr"}
-	};
-	Color color[10] = { {223, 255, 7, 255}, {228, 73, 179, 255}, {74, 139, 255, 255}, {86, 223, 13, 255}, {209, 16, 64, 255}, {44, 191, 147, 255}, {78, 66, 114, 255}, {191, 191, 191, 255}, {145, 214, 180, 255}, {228, 145, 89, 255} }, bowlColor = { 255, 255, 255, 0 };
-	Vector2 center = { 759, 806 };
-	
+	color.resize(10);
+	color = { {223, 255, 7, 255}, {228, 73, 179, 255}, {74, 139, 255, 255}, {86, 223, 13, 255}, {209, 16, 64, 255}, {44, 191, 147, 255}, {78, 66, 114, 255}, {191, 191, 191, 255}, {145, 214, 180, 255}, {228, 145, 89, 255} };
+	bowlColor = { 255, 255, 255, 0 };
+	center = { 759, 806 };
 }
 
 void Render::FadeOut(Color& fadeOut, bool& isOver)
@@ -44,13 +45,13 @@ void Render::FadeOut(Color& fadeOut, bool& isOver)
 void Render::MainMenu(bool& isPlayOn, bool& exit)
 {
 	Rectangle buttonFrame;
-	buttonFrame = { 0,0,(float)core::textures->playButton.width / 2, float(core::textures->playButton.height)};
+	buttonFrame = { 0,0,(float)textures->playButton.width / 2, float(textures->playButton.height)};
 	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2 - 100,(float)GetScreenHeight() / 2, 200, 100, }))
-		buttonFrame.x = core::textures->playButton.width/2;
+		buttonFrame.x = textures->playButton.width/2;
 
-	DrawTexture(core::textures->room, 0, 0, WHITE);
-	DrawTexture(core::textures->shadows, 0, 0, WHITE);
-	DrawTextureRec(core::textures->playButton, buttonFrame, {(float)GetScreenWidth()/2 - 100,(float)GetScreenHeight()/2}, WHITE);
+	DrawTexture(textures->room, 0, 0, WHITE);
+	DrawTexture(textures->shadows, 0, 0, WHITE);
+	DrawTextureRec(textures->playButton, buttonFrame, {(float)GetScreenWidth()/2 - 100,(float)GetScreenHeight()/2}, WHITE);
 	DrawRectangle(GetScreenWidth() / 2, GetScreenHeight() / 2 + 100, 200, 50, BLUE);
 	DrawText("Exit", GetScreenWidth() / 2, GetScreenHeight() / 2 + 100, 20, WHITE);
 
@@ -65,43 +66,51 @@ void Render::MainMenu(bool& isPlayOn, bool& exit)
 
 void Render::InitialiseTextures()
 {
-	core::textures->InitialiseTextures();
+	textures->InitialiseTextures();
 }
 
 			
-void Render::SubjectStats(std::string stats)
+void Render::SubjectStats(std::string& stats)
 {
 	
 	
 	DrawRectangle(380, 110, 400, 100, BLACK);
 
-	core::delay += GetFrameTime();
+	delay += GetFrameTime();
 	
-	if (core::delay > .1f && core::letterIndex < stats.size())
+	if (delay > .1f && letterIndex < stats.size())
 	{
-		core::delay = 0.0f;
-		core::text += stats[core::letterIndex];
-		core::letterIndex++;
+		delay = 0.0f;
+		text += stats[letterIndex];
+		letterIndex++;
 
 	}
-	DrawText(core::text.c_str(), 420, 130, 20, WHITE);
+	if (switchFrame == 9 && isWritten)
+	{
+		text = "";
+		stats = "Subject has been healed";
+		letterIndex = 0;
+		isWritten = false;
+	}
+	std::cout << switchFrame << std::endl;
+	DrawText(text.c_str(), 420, 130, 20, WHITE);
 }
 
 void Render::CellsUnderMicroscope(Texture2D cells)
 {
 	
-	Rectangle currentFrame = { core::switchFrame * cells.width / 11,0, (float)cells.width / 11, (float)cells.height };
+	Rectangle currentFrame = { switchFrame * cells.width / 11,0, (float)cells.width / 11, (float)cells.height };
 	DrawTextureRec(cells, currentFrame , {180, 110}, WHITE);
 	
-	core::frameTime += GetFrameTime();
-	std::cout << core::switchFrame * cells.width << std::endl;
-	if (core::frameTime > 0.3f)
+	frameTime += GetFrameTime();
+
+	if (frameTime > 0.3f)
 	{
-		if (core::switchFrame < 11)
-			core::switchFrame++;
+		if (switchFrame < 11)
+			switchFrame++;
 		else
-			core::switchFrame = 0;
-		core::frameTime = 0;
+			switchFrame = 0;
+		frameTime = 0;
 	}
 	
 }
@@ -116,25 +125,25 @@ void Render::TryChemicalReaction(Texture2D button)
 void Render::Draw()
 {
 	for (int i = 0; i < 10; i++)
-		if (CheckCollisionPointRec(GetMousePosition(), { core::textures->flaskPositionX[i], core::textures->flaskPositionY[i], 25, 50 }) && !core::isEquipped && core::isDropped)
-			core::index = i;
-	DrawTexture(core::textures->room, 0, 0, WHITE);
-	core::input->DragAndDrop(core::textures->flaskPositionX[core::index], core::textures->flaskPositionY[core::index], core::textures->flasks[core::index], core::textures->firstPosition[core::index], core::isEquipped, core::isDropped);
+		if (CheckCollisionPointRec(GetMousePosition(), { textures->flaskPositionX[i], textures->flaskPositionY[i], 25, 50 }) && !isEquipped && isDropped)
+			index = i;
+	DrawTexture(textures->room, 0, 0, WHITE);
+	input->DragAndDrop(textures->flaskPositionX[index], textures->flaskPositionY[index], textures->flasks[index], textures->firstPosition[index], isEquipped, isDropped);
 	if (CheckCollisionPointRec(GetMousePosition(), { 100, 100, 100, 100 }))
 	{
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
-			core::bowlColor = { 255, 255, 255, 0 };
-			core::mixCount = 0;
-			for (auto it = core::indexes.begin(); it != core::indexes.end(); it++)
-				core::textures->RestoreFlask(*it);
-			core::indexes.clear();
-			core::chemicalReactions.clear();
-			core::isPossible = 0;
-			core::reactionIndex = 0;
+			bowlColor = { 255, 255, 255, 0 };
+			mixCount = 0;
+			for (auto it = indexes.begin(); it != indexes.end(); it++)
+				textures->RestoreFlask(*it);
+			indexes.clear();
+			chemicalReactions.clear();
+			isPossible = 0;
+			reactionIndex = 0;
 		}
 	}
-	if (CheckCollisionPointRec({ core::textures->flaskPositionX[core::index], core::textures->flaskPositionY[core::index] }, { 660, 740, 200, 400 }) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+	if (CheckCollisionPointRec({ textures->flaskPositionX[index], textures->flaskPositionY[index] }, { 660, 740, 200, 400 }) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 	{
 		for (int i = 0; i < 5; i++)
 		{
@@ -142,90 +151,99 @@ void Render::Draw()
 
 			for (int j = 0; j < 2; j++)
 			{
-				if (core::possibleChemicalReactions[i][j].find(core::chemicalCompounds[core::index]))
+				
+				if (possibleChemicalReactions[i][j].find(chemicalCompounds[index]))
 				{
-					core::chemicalReactions.push_back(core::chemicalCompounds[core::index]);
+
+					chemicalReactions.push_back(chemicalCompounds[index]);
 					flag = true;
-					core::isPossible = true;
-					core::isPreviousPossible = core::isPossible;
+					isPossible = true;
+					isPreviousPossible = isPossible;
 					break;
 				}
 			}
 			if (flag)
 				break;
 		}
-		if (core::isPossible)
+		
+		
+		
+		if (isPossible)
 		{
-			core::mixCount++;
-			core::isOnBowl = true;
+			mixCount++;
+			isOnBowl = true;
 		}
 	}
 	else
-		core::isOnBowl = false;
+		isOnBowl = false;
 
-	if (core::isOnBowl && core::mixCount <= 2)
+	if (isOnBowl && mixCount <= 2)
 	{
 
 		//Sets bowl's color to be a mixture of 2 flasks colors'
-		if (core::isPossible)
+		if (isPossible)
 		{
 			
-			core::bowlColor.a = 255;
-			core::bowlColor.r = 255 - (sqrt(pow((255 - (core::bowlColor.r)), 2) + pow((255 - (core::color[core::index].r)), 2) / 2));
-			core::bowlColor.g = 255 - (sqrt(pow((255 - (core::bowlColor.g)), 2) + pow((255 - (core::color[core::index].g)), 2) / 2));
-			core::bowlColor.b = 255 - (sqrt(pow((255 - (core::bowlColor.b)), 2) + pow((255 - (core::color[core::index].b)), 2) / 2));
-			core::indexes.push_back(core::index);
-			core::textures->RemoveFlask(core::index);
-			core::isPossible = true;
+			bowlColor.a = 255;
+			bowlColor.r = 255 - (sqrt(pow((255 - (bowlColor.r)), 2) + pow((255 - (color[index].r)), 2) / 2));
+			bowlColor.g = 255 - (sqrt(pow((255 - (bowlColor.g)), 2) + pow((255 - (color[index].g)), 2) / 2));
+			bowlColor.b = 255 - (sqrt(pow((255 - (bowlColor.b)), 2) + pow((255 - (color[index].b)), 2) / 2));
+			indexes.push_back(index);
+			textures->RemoveFlask(index);
+			isPossible = true;
 		}
 		
 	}
 
 	
-	DrawCircleSector(core::center, 81.0f, 270.0f, 450.0f, (int)20.0f, core::bowlColor);
+	DrawCircleSector(center, 81.0f, 270.0f, 450.0f, (int)20.0f, bowlColor);
 
-	DrawTexture(core::textures->bowl, 560, 700, WHITE);
+	DrawTexture(textures->bowl, 560, 700, WHITE);
 
 
 	for (int i = 0; i < 2; i++)
-		DrawTexture(core::textures->flaskHolder, core::textures->HolderPositionX[i], 600, WHITE);
+		DrawTexture(textures->flaskHolder, textures->HolderPositionX[i], 600, WHITE);
 
 	for (int i = 0; i < 10; i++)
-		DrawTexture(core::textures->flasks[i], core::textures->flaskPositionX[i], core::textures->flaskPositionY[i], GRAY);
+		DrawTexture(textures->flasks[i], textures->flaskPositionX[i], textures->flaskPositionY[i], GRAY);
 	
-	core::flaskColor = core::input->getColor(core::textures->flaskPositionX[core::index], core::textures->flaskPositionY[core::index]);
-	DrawTexture(core::textures->flasks[core::index], core::textures->flaskPositionX[core::index], core::textures->flaskPositionY[core::index], core::flaskColor);
+	flaskColor = input->getColor(textures->flaskPositionX[index], textures->flaskPositionY[index]);
+	DrawTexture(textures->flasks[index], textures->flaskPositionX[index], textures->flaskPositionY[index], flaskColor);
 
-	core::bookColor = core::input->getColor(450, 685);
-	DrawTexture(core::textures->book, 450, 685, core::bookColor);
+	bookColor = input->getColor(450, 685);
+	DrawTexture(textures->book, 450, 685, bookColor);
 
-	DrawTexture(core::textures->shadows, 0, 0, WHITE);
-	SubjectStats(core::stats);
-	CellsUnderMicroscope(core::textures->cells);
-	TryChemicalReaction(core::textures->tryButton);
+
+	DrawTexture(textures->shadows, 0, 0, WHITE);
+	SubjectStats(stats);
+	CellsUnderMicroscope(textures->cells);
+	
+	
+	
+	TryChemicalReaction(textures->tryButton);
 	DrawRectangle(100, 100, 100, 100, BLUE);
 	
 
 	if (CheckCollisionPointRec(GetMousePosition(), { 450, 685, 100, 120 }) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-		core::isBookOpened = true;
+		isBookOpened = true;
 	if (CheckCollisionPointRec(GetMousePosition(), { 600, 105, 40, 40 }) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-		core::isBookOpened = false;
+		isBookOpened = false;
 
 	if (IsKeyPressed(KEY_W))
-		core::pageIndex--;
+		pageIndex--;
 	if (IsKeyPressed(KEY_S))
-		core::pageIndex++;
-	if (core::pageIndex < 0)
-		core::pageIndex = 2; // gotta change this!!!!!!
-	if (core::pageIndex > 2) // this too
-		core::pageIndex = 0; 
+		pageIndex++;
+	if (pageIndex < 0)
+		pageIndex = 2; // gotta change this!!!!!!
+	if (pageIndex > 2) // this too
+		pageIndex = 0; 
 
-	if (core::isBookOpened)
-		core::textures->BookOpened(core::pageIndex);
+	if (isBookOpened)
+		textures->BookOpened(pageIndex);
 		
 }
 
 void Render::UnloadTextures()
 {
-	delete core::textures;
+	delete textures;
 }
