@@ -4,15 +4,15 @@ namespace core
 {
 	std::string text = "";
 	int letterIndex = 0;
-	float delay = 0;
+	float delay = 0, frameTime = 0;
 	char stats[100] = "Subject has contained cancer";
 	std::vector<int>indexes;
 	Textures* textures = new Textures;
 	InputHandler* input = new InputHandler;
 	Color flaskColor, bookColor, fade;
-	Rectangle buttonFrame;
+	
 	bool isPreviousPossible = false, isPossible = false, switchTransition = false, isDropped = true, isUpdated = false, isEquipped = false, isBookOpened = false, isOnBowl = false;
-	int index, mixCount = 0;
+	int index, mixCount = 0, switchFrame = 0;
 	int pageIndex = 0, reactionIndex = 0;
 	std::vector<std::string> chemicalCompounds{"","","H2O","","","Cr(OH3)","","","",""};
 	std::vector <std::string> chemicalReactions;
@@ -43,13 +43,14 @@ void Render::FadeOut(Color& fadeOut, bool& isOver)
 
 void Render::MainMenu(bool& isPlayOn, bool& exit)
 {
-	core::buttonFrame = { 0,0,(float)core::textures->playButton.width / 2, 50 };
-	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2 - 100,(float)GetScreenHeight() / 2, 100, 50, }))
-		core::buttonFrame.x = 100;
+	Rectangle buttonFrame;
+	buttonFrame = { 0,0,(float)core::textures->playButton.width / 2, float(core::textures->playButton.height)};
+	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2 - 100,(float)GetScreenHeight() / 2, 200, 100, }))
+		buttonFrame.x = core::textures->playButton.width/2;
 
 	DrawTexture(core::textures->room, 0, 0, WHITE);
 	DrawTexture(core::textures->shadows, 0, 0, WHITE);
-	DrawTextureRec(core::textures->playButton, core::buttonFrame, {(float)GetScreenWidth()/2 - 100,(float)GetScreenHeight()/2}, WHITE);
+	DrawTextureRec(core::textures->playButton, buttonFrame, {(float)GetScreenWidth()/2 - 100,(float)GetScreenHeight()/2}, WHITE);
 	DrawRectangle(GetScreenWidth() / 2, GetScreenHeight() / 2 + 100, 200, 50, BLUE);
 	DrawText("Exit", GetScreenWidth() / 2, GetScreenHeight() / 2 + 100, 20, WHITE);
 
@@ -72,7 +73,7 @@ void Render::SubjectStats(std::string stats)
 {
 	
 	
-	DrawRectangle(200, 200, 400, 100, BLACK);
+	DrawRectangle(380, 110, 400, 100, BLACK);
 
 	core::delay += GetFrameTime();
 	
@@ -83,7 +84,34 @@ void Render::SubjectStats(std::string stats)
 		core::letterIndex++;
 
 	}
-	DrawText(core::text.c_str(), 220, 220, 20, WHITE);
+	DrawText(core::text.c_str(), 420, 130, 20, WHITE);
+}
+
+void Render::CellsUnderMicroscope(Texture2D cells)
+{
+	
+	Rectangle currentFrame = { core::switchFrame * cells.width / 11,0, (float)cells.width / 11, (float)cells.height };
+	DrawTextureRec(cells, currentFrame , {180, 110}, WHITE);
+	
+	core::frameTime += GetFrameTime();
+	std::cout << core::switchFrame * cells.width << std::endl;
+	if (core::frameTime > 0.3f)
+	{
+		if (core::switchFrame < 11)
+			core::switchFrame++;
+		else
+			core::switchFrame = 0;
+		core::frameTime = 0;
+	}
+	
+}
+
+void Render::TryChemicalReaction(Texture2D button)
+{
+	Rectangle buttonFrame = { 0, 0, (float)button.width / 2, (float)button.height };
+		if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth()/2 + 100, (float)GetScreenHeight() - 150, (float)button.width / 2, (float)button.height}))
+			buttonFrame.x = button.width / 2;
+		DrawTextureRec(button, buttonFrame, { (float)GetScreenWidth()/2 + 100, float(GetScreenHeight() - 150) }, WHITE);
 }
 void Render::Draw()
 {
@@ -173,6 +201,8 @@ void Render::Draw()
 
 	DrawTexture(core::textures->shadows, 0, 0, WHITE);
 	SubjectStats(core::stats);
+	CellsUnderMicroscope(core::textures->cells);
+	TryChemicalReaction(core::textures->tryButton);
 	DrawRectangle(100, 100, 100, 100, BLUE);
 	
 

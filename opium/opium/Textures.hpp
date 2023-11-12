@@ -3,7 +3,7 @@ class Textures
 {
 public:
 	
-	Texture2D flaskHolder, book, room, shadows, bowl, playButton;
+	Texture2D flaskHolder, book, room, shadows, bowl, playButton, cells, tryButton;
 	std::vector<Texture2D> flasks, pages;
 	float flaskPositionX[10];
 	std::vector<float> HolderPositionX;
@@ -14,7 +14,7 @@ public:
 	std::string GetDirectory(int number, std::string object);
 
 	//Sets texture size
-	void SetSize(Texture2D* texture, int height, int width);
+	void SetSize(Texture2D& texture, int height, int width);
 
 	//Initialises game textures
 	void InitialiseTextures();

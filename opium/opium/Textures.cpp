@@ -1,8 +1,8 @@
 #include "pch.hpp"
-void Textures::SetSize(Texture2D* texture, int height, int width)
+void Textures::SetSize(Texture2D& texture, int height, int width)
 {
-	texture->height = height;
-	texture->width = width;
+	texture.height = height;
+	texture.width = width;
 }
 std::string Textures::GetDirectory(int number, std::string object)
 {
@@ -22,11 +22,16 @@ void Textures::InitialiseTextures()
 	book = LoadTexture("../assets/book.png");
 	bowl = LoadTexture("../assets/bowl.png");
 	playButton = LoadTexture("../assets/playButton.png");
-	SetSize(&flaskHolder , 125, 225);
-	SetSize(&book, 100, 120);
-	SetSize(&room, 900, 1600);
-	SetSize(&shadows, 900, 1600);
-	SetSize(&bowl, 200, 400);
+	tryButton = LoadTexture("../assets/tryButton.png");
+	cells = LoadTexture("../assets/cells/cellsAnimation.png");
+	SetSize(flaskHolder , 125, 225);
+	SetSize(book, 100, 120);
+	SetSize(room, 900, 1600);
+	SetSize(shadows, 900, 1600);
+	SetSize(bowl, 200, 400);
+	SetSize(cells, cells.height * 3, cells.width * 3);
+	SetSize(playButton, playButton.height * 2, playButton.width * 2);
+	SetSize(tryButton, tryButton.height * 2, tryButton.width * 2);
 	for (int i = 0; i < 10; i++)
 	{
 		flask = LoadTexture(Textures::GetDirectory(i+1, "flask").c_str());

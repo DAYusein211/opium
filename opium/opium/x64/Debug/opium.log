@@ -1,23 +1,20 @@
-﻿  Game.cpp
-  InputHandler.cpp
-C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\InputHandler.cpp(13,38): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\InputHandler.cpp(14,38): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
-  Renderer.cpp
-C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(146,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(147,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(148,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(163,77): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
+﻿  Renderer.cpp
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(49,51): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(93,61): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(93,61): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(112,33): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(173,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(174,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(175,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(190,77): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(166,109): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(166,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(169,138): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(169,93): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  Textures.cpp
-  main.cpp
-  Generating Code...
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(193,109): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(193,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(196,138): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(196,93): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 raylib.lib(rcore.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(rcore.c.obj)' or at ''; linking object as if no debug info
 raylib.lib(rshapes.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(rshapes.c.obj)' or at ''; linking object as if no debug info
   opium.vcxproj -> C:\Users\alide\OneDrive\Documents\School\opium\opium\x64\Debug\opium.exe
