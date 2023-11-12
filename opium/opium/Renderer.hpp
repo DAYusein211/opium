@@ -1,6 +1,7 @@
 class Render
 {
 public:
+	//Render();
 	//Renders the game's menu
 	void MainMenu(bool& isPlayOn, bool& exit);
 	void FadeOut(Color& fadeOut, bool& isOver);

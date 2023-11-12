@@ -22,9 +22,11 @@ void InputHandler::Move(float& pointX, float& pointY, float& destinationX, float
 	
 }
 
+
+
 	
 
-void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY,Texture2D flask, Vector2 firstPosition, bool& isEquipped, bool& isOnBowl, int& mixCount, bool& isDropped)
+void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY,Texture2D flask, Vector2 firstPosition, bool& isEquipped, bool& isDropped)
 {
 	
 	if (userActions::drop)
@@ -47,14 +49,8 @@ void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY,Text
 		isEquipped = false;
 	}
 	
-	if (CheckCollisionPointRec({flaskPositionX, flaskPositionY}, {660, 740, 200, 400}) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
-	{
-		isOnBowl = true;
-		mixCount++;
-	}
 	
-	else
-		isOnBowl = false;
+
 	if (userActions::isDragActive)
 	{
 		flaskPositionX = GetMousePosition().x - 10;

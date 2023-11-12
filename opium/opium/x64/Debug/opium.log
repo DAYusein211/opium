@@ -1,14 +1,23 @@
-﻿  Renderer.cpp
-C:\Users\GoGo\opium\opium\opium\opium\Renderer.cpp(91,27): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\GoGo\opium\opium\opium\opium\Renderer.cpp(92,27): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\GoGo\opium\opium\opium\opium\Renderer.cpp(93,27): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
-C:\Users\GoGo\opium\opium\opium\opium\Renderer.cpp(117,77): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
+﻿  Game.cpp
+  InputHandler.cpp
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\InputHandler.cpp(13,38): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\InputHandler.cpp(14,38): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  Renderer.cpp
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(146,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(147,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(148,28): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(163,77): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
           with
           [
               _Ty=float
           ]
-C:\Users\GoGo\opium\opium\opium\opium\Renderer.cpp(120,109): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GoGo\opium\opium\opium\opium\Renderer.cpp(120,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GoGo\opium\opium\opium\opium\Renderer.cpp(123,138): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Users\GoGo\opium\opium\opium\opium\Renderer.cpp(123,93): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-  opium.vcxproj -> C:\Users\GoGo\opium\opium\opium\x64\Debug\opium.exe
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(166,109): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(166,74): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(169,138): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(169,93): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Textures.cpp
+  main.cpp
+  Generating Code...
+raylib.lib(rcore.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(rcore.c.obj)' or at ''; linking object as if no debug info
+raylib.lib(rshapes.c.obj) : warning LNK4099: PDB '' was not found with 'raylib.lib(rshapes.c.obj)' or at ''; linking object as if no debug info
+  opium.vcxproj -> C:\Users\alide\OneDrive\Documents\School\opium\opium\x64\Debug\opium.exe
