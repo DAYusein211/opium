@@ -1,4 +1,7 @@
-﻿  Renderer.cpp
+﻿  InputHandler.cpp
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\InputHandler.cpp(14,38): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\InputHandler.cpp(15,38): warning C4244: '+=': conversion from 'double' to 'float', possible loss of data
+  Renderer.cpp
 C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(61,50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(67,50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(106,53): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
@@ -27,4 +30,7 @@ C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(307,91):
 C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(307,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(310,102): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
 C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(310,69): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  main.cpp
+  Game.cpp
+  Generating Code...
   opium.vcxproj -> C:\Users\alide\OneDrive\Documents\School\opium\opium\x64\Debug\opium.exe

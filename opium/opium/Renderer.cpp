@@ -328,7 +328,7 @@ void Render::Draw()
 		if ((chemicalReactions[0] == "H2O" && chemicalReactions[1] == "Cr(OH)3") || (chemicalReactions[1] == "H2O" && chemicalReactions[0] == "Cr(OH)3"))
 			CellsUnderMicroscope(textures->cancerCells, false);
 
-		else if ((chemicalReactions[0] == "U" && chemicalReactions[1] == "Fe") || (chemicalReactions[1] == "U" && chemicalReactions[0] == "Fe"))
+		else if ((chemicalReactions[0] == "U" && chemicalReactions[1] == "Fe") || (chemicalReactions[1] == "U" && chemicalReactions[0] == "Fe") || (chemicalReactions[1] == "U" && chemicalReactions[0] == "H2O") || (chemicalReactions[0] == "U" && chemicalReactions[1] == "H2O"))
 			CellsUnderMicroscope(textures->toxicCells, false);
 
 		else
