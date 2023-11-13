@@ -5,13 +5,14 @@ Game::Game(int width, int height, const char* title)
 {
 	InitWindow(width, height, title);
 	SetTargetFPS(60);
+	isPlayOn = false;
+	exit = false;
+	isWindowClosed = false;
+	fadeOutOver = false;
+	fadeOut = { 0,0,0, 255 };
 };
 
-namespace run
-{
-	bool isPlayOn = false, exit = false, isWindowClosed = false, fadeOutOver = false;
-	Color fadeOut = { 0,0,0, 255 };
-}
+
 
 void Game::Run()
 {
@@ -19,23 +20,23 @@ void Game::Run()
 	
 	renderer->InitialiseTextures();
 
-	while (!run::isWindowClosed)
+	while (!isWindowClosed)
 	{
 		BeginDrawing();
 
-		if (!run::isPlayOn)
-			renderer->MainMenu(run::isPlayOn, run::exit);
+		if (!isPlayOn)
+			renderer->MainMenu(isPlayOn, exit);
 		else
 		{
 
 				renderer->Draw();
-			renderer->FadeOut(run::fadeOut, run::fadeOutOver);
+			renderer->FadeOut(fadeOut, fadeOutOver);
 			
 			
 		}
 
-		if (run::exit || WindowShouldClose())
-			run::isWindowClosed = true;
+		if (exit || WindowShouldClose())
+			isWindowClosed = true;
 		
 		EndDrawing();
 		

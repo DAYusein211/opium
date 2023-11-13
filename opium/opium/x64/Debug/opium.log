@@ -1,1 +1,30 @@
-﻿  opium.vcxproj -> C:\Users\alide\OneDrive\Documents\School\opium\opium\x64\Debug\opium.exe
+﻿  Renderer.cpp
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(61,50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(67,50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(106,53): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(106,53): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(122,58): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(122,58): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(139,58): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(139,58): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(153,58): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(153,58): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(167,58): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(167,58): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(183,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(202,32): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(226,40): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(226,40): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(254,21): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(255,21): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(256,21): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(304,65): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(307,91): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(307,62): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(310,102): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\alide\OneDrive\Documents\School\opium\opium\opium\Renderer.cpp(310,69): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  opium.vcxproj -> C:\Users\alide\OneDrive\Documents\School\opium\opium\x64\Debug\opium.exe

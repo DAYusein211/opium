@@ -2,31 +2,40 @@
 #include "Renderer.hpp"
 Render::Render()
 {
-	text = "";
-	letterIndex = 0;
-	delay = 0;
-	frameTime = 0;
-	stats = "Subject has contained cancer";
 	textures = new Textures;
 	input = new InputHandler;
-	isPossible = false;
+	isCleared = false;
+	clearText = false;
 	switchTransition = false;
 	isDropped = true;
-	isWritten = true;
 	isUpdated = false;
 	isEquipped = false;
 	isBookOpened = false;
 	isOnBowl = false;
+	tryOn = false;
+	cancer = false;
+	idle = false;
+	toxic = false;
+	burn = false;
+	letterIndex = 0;
+	delay = 0;
+	frameTime = 0;
+	subjectFrameTime = 0;
 	mixCount = 0;
-	switchFrame = 0;
+	cellFrame = 0;
+	subjectFrame = 0;
 	pageIndex = 0;
 	reactionIndex = 0;
-	chemicalCompounds = { "","","H2O","","","Cr(OH3)","","","","" };
-	
 	color.resize(10);
-	color = { {223, 255, 7, 255}, {228, 73, 179, 255}, {74, 139, 255, 255}, {86, 223, 13, 255}, {209, 16, 64, 255}, {44, 191, 147, 255}, {78, 66, 114, 255}, {191, 191, 191, 255}, {145, 214, 180, 255}, {228, 145, 89, 255} };
+	color = { {228, 219, 20, 255}, {64, 64, 61, 255}, {74, 139, 255, 144}, {86, 223, 13, 255}, {218, 223, 181, 255}, {44, 191, 147, 255}, {255, 221, 200, 255}, {191, 191, 191, 255}, {185, 255, 109, 255}, {255, 209, 214, 255} };
 	bowlColor = { 255, 255, 255, 0 };
 	center = { 759, 806 };
+
+	chemicalCompounds = { "S","Fe","H2O","U","P","Cr(OH)3","Na","Ca","K","Mg" };
+	stats = "-Subject is ready for experimental tests \n-White cells are healthy";
+	text = "";
+
+	
 }
 
 void Render::FadeOut(Color& fadeOut, bool& isOver)
@@ -44,24 +53,28 @@ void Render::FadeOut(Color& fadeOut, bool& isOver)
 
 void Render::MainMenu(bool& isPlayOn, bool& exit)
 {
-	Rectangle buttonFrame;
-	buttonFrame = { 0,0,(float)textures->playButton.width / 2, float(textures->playButton.height)};
-	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2 - 100,(float)GetScreenHeight() / 2, 200, 100, }))
-		buttonFrame.x = textures->playButton.width/2;
-
-	DrawTexture(textures->room, 0, 0, WHITE);
-	DrawTexture(textures->shadows, 0, 0, WHITE);
-	DrawTextureRec(textures->playButton, buttonFrame, {(float)GetScreenWidth()/2 - 100,(float)GetScreenHeight()/2}, WHITE);
-	DrawRectangle(GetScreenWidth() / 2, GetScreenHeight() / 2 + 100, 200, 50, BLUE);
-	DrawText("Exit", GetScreenWidth() / 2, GetScreenHeight() / 2 + 100, 20, WHITE);
-
-	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2 - 100,(float)GetScreenHeight() / 2, 300, 100, }))
+	Rectangle playButtonFrame, exitButtonFrame;
+	playButtonFrame = { 0, 0,(float)textures->playButton.width / 2, (float)textures->playButton.height};
+	exitButtonFrame = { 0, 0,(float)textures->exitButton.width / 2, (float)textures->exitButton.height };
+	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2 - 400,(float)GetScreenHeight() / 2 - 100, 200, 100, }))
+	{
+		playButtonFrame.x = textures->playButton.width / 2;
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 			isPlayOn = true;
-
-	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2,(float)GetScreenHeight() / 2 + 100, 200, 50, }))
+	}
+	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2 + 150,(float)GetScreenHeight() / 2 - 100, 200, 100, }))
+	{
+		exitButtonFrame.x = textures->exitButton.width / 2;
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 			exit = true;
+	}
+	DrawTexture(textures->room, 0, 0, WHITE);
+
+	DrawTexture(textures->shadows, 0, 0, WHITE);
+
+	DrawTextureRec(textures->playButton, playButtonFrame, {(float)GetScreenWidth()/2 - 400,(float)GetScreenHeight()/2 - 100}, WHITE);
+	DrawTextureRec(textures->exitButton, exitButtonFrame, {(float)GetScreenWidth() / 2 + 150, (float)GetScreenHeight() / 2 - 100 }, WHITE);
+
 }
 
 void Render::InitialiseTextures()
@@ -72,107 +85,164 @@ void Render::InitialiseTextures()
 			
 void Render::SubjectStats(std::string& stats)
 {
-	
-	
-	DrawRectangle(380, 110, 400, 100, BLACK);
 
+	DrawRectangleRounded({ 360, 110, 630, 100, }, 0.2f, 0, {157, 144, 127, 255});
+	DrawRectangleRoundedLines({ 360, 110, 630, 100, }, 0.2f, 0, 5, { 76, 39, 39, 255 });
 	delay += GetFrameTime();
 	
-	if (delay > .1f && letterIndex < stats.size())
+	if (delay > 0.1f && letterIndex < stats.size())
 	{
 		delay = 0.0f;
 		text += stats[letterIndex];
 		letterIndex++;
-
 	}
-	if (switchFrame == 9 && isWritten)
-	{
-		text = "";
-		stats = "Subject has been healed";
-		letterIndex = 0;
-		isWritten = false;
-	}
-	std::cout << switchFrame << std::endl;
-	DrawText(text.c_str(), 420, 130, 20, WHITE);
+	
+	DrawText(text.c_str(), 440, 130, 20, { 76, 39, 39, 255 });
 }
 
-void Render::CellsUnderMicroscope(Texture2D cells)
+void Render::CellsUnderMicroscope(Texture2D cells, bool isNormal)
 {
-	
-	Rectangle currentFrame = { switchFrame * cells.width / 11,0, (float)cells.width / 11, (float)cells.height };
+	frameTime += GetFrameTime();
+	Rectangle currentFrame = { cellFrame * cells.width / 11, 0, (float)cells.width / 11, (float)cells.height };
 	DrawTextureRec(cells, currentFrame , {180, 110}, WHITE);
 	
-	frameTime += GetFrameTime();
-
 	if (frameTime > 0.3f)
 	{
-		if (switchFrame < 11)
-			switchFrame++;
-		else
-			switchFrame = 0;
+		if (cellFrame < 10)
+			cellFrame++;
+		else if(isNormal)
+			cellFrame = 0;
 		frameTime = 0;
 	}
 	
 }
+void Render::SubjectIdle(Texture2D subject, int frames)
+{
+	subjectFrameTime += GetFrameTime();
+	Rectangle currentFrame = { subjectFrame * subject.width / frames, 0, (float)subject.width / frames, (float)subject.height };
+	DrawTextureRec(subject, currentFrame, { (float)GetScreenWidth()/2 - 100, 200}, WHITE);
 
-void Render::TryChemicalReaction(Texture2D button)
+	if (subjectFrameTime > 0.3f)
+	{
+		if (subjectFrame < frames)
+			subjectFrame++;
+
+		else 
+			subjectFrame = 0;
+
+		subjectFrameTime = 0;
+	}
+}
+void Render::SubjectCancer(Texture2D subject, int frames)
+{
+	subjectFrameTime += GetFrameTime();
+	Rectangle currentFrame = { subjectFrame * subject.width / frames, 0, (float)subject.width / frames, (float)subject.height };
+	DrawTextureRec(subject, currentFrame, { (float)GetScreenWidth() / 2 - 200, 200 }, WHITE);
+
+	if (subjectFrameTime > 0.3f)
+	{
+		if (subjectFrame < frames - 1)
+			subjectFrame++;
+
+		subjectFrameTime = 0;
+	}
+}
+void Render::SubjectToxic(Texture2D subject, int frames)
+{
+	subjectFrameTime += GetFrameTime();
+	Rectangle currentFrame = { subjectFrame * subject.width / frames, 0, (float)subject.width / frames, (float)subject.height };
+	DrawTextureRec(subject, currentFrame, { (float)GetScreenWidth() / 2 - 240, 200 }, WHITE);
+
+	if (subjectFrameTime > 0.1f)
+	{
+		if (subjectFrame < frames - 1)
+			subjectFrame++;
+
+		subjectFrameTime = 0;
+	}
+}
+void Render::SubjectBurn(Texture2D subject, int frames)
+{
+	subjectFrameTime += GetFrameTime();
+	Rectangle currentFrame = { subjectFrame * subject.width / frames, 0, (float)subject.width / frames, (float)subject.height };
+	DrawTextureRec(subject, currentFrame, { (float)GetScreenWidth() / 2 - 80, 200 }, WHITE);
+
+	if (subjectFrameTime > 0.3f)
+	{
+		if (subjectFrame < frames - 1)
+			subjectFrame++;
+
+		subjectFrameTime = 0;
+	}
+}
+void Render::TryChemicalReaction(Texture2D button, bool& tryOn, std::vector<std::string> chemicalReactions)
 {
 	Rectangle buttonFrame = { 0, 0, (float)button.width / 2, (float)button.height };
-		if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth()/2 + 100, (float)GetScreenHeight() - 150, (float)button.width / 2, (float)button.height}))
-			buttonFrame.x = button.width / 2;
-		DrawTextureRec(button, buttonFrame, { (float)GetScreenWidth()/2 + 100, float(GetScreenHeight() - 150) }, WHITE);
+	if (CheckCollisionPointRec(GetMousePosition(), { (float)GetScreenWidth() / 2 + 100, (float)GetScreenHeight() - 150, (float)button.width / 2, (float)button.height }))
+	{
+		buttonFrame.x = button.width / 2;
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			tryOn = true;
+			subjectFrame = 0;
+			cellFrame = 0;
+			text.clear();
+			letterIndex = 0;
+		}
+	}
+	DrawTextureRec(button, buttonFrame, { (float)GetScreenWidth() / 2 + 100, float(GetScreenHeight() - 150) }, WHITE);
+}
+
+void Render::Reset(Texture2D button)
+{
+	Rectangle buttonFrame = { 0, 0, (float)button.width / 2, (float)button.height };
+	
+	if (CheckCollisionPointRec(GetMousePosition(), { (float)button.width, (float)button.height, 200, (float)GetScreenHeight() - 300 }))
+	{
+		buttonFrame.x = button.width / 2;
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		{
+			bowlColor = { 255, 255, 255, 0 };
+			mixCount = 0;
+
+			for (auto it = indexes.begin(); it != indexes.end(); it++)
+				textures->RestoreFlask(*it);
+			tryOn = false;
+			subjectFrame = 0;
+			indexes.clear();
+			chemicalReactions.clear();
+			cellFrame = 0;
+			reactionIndex = 0;
+			text.clear();
+			letterIndex = 0;
+			stats = "-Subject is ready for experimental tests";
+		}
+	}
+	DrawTextureRec(button, buttonFrame, { 200, (float)GetScreenHeight() - 300 }, WHITE);
+}
+
+void Render::DrawGuideBook(Texture2D book, int index)
+{
+	Rectangle page = { index * book.width / 10, 0, (float)book.width / 10, (float)book.height };
+
+	DrawTextureRec(book, page, { 500, 100, }, WHITE);
 }
 void Render::Draw()
 {
 	for (int i = 0; i < 10; i++)
 		if (CheckCollisionPointRec(GetMousePosition(), { textures->flaskPositionX[i], textures->flaskPositionY[i], 25, 50 }) && !isEquipped && isDropped)
 			index = i;
+
 	DrawTexture(textures->room, 0, 0, WHITE);
+
 	input->DragAndDrop(textures->flaskPositionX[index], textures->flaskPositionY[index], textures->flasks[index], textures->firstPosition[index], isEquipped, isDropped);
-	if (CheckCollisionPointRec(GetMousePosition(), { 100, 100, 100, 100 }))
-	{
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-		{
-			bowlColor = { 255, 255, 255, 0 };
-			mixCount = 0;
-			for (auto it = indexes.begin(); it != indexes.end(); it++)
-				textures->RestoreFlask(*it);
-			indexes.clear();
-			chemicalReactions.clear();
-			isPossible = 0;
-			reactionIndex = 0;
-		}
-	}
+
+	
 	if (CheckCollisionPointRec({ textures->flaskPositionX[index], textures->flaskPositionY[index] }, { 660, 740, 200, 400 }) && IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 	{
-		for (int i = 0; i < 5; i++)
-		{
-			bool flag = false;
-
-			for (int j = 0; j < 2; j++)
-			{
-				
-				if (possibleChemicalReactions[i][j].find(chemicalCompounds[index]))
-				{
-
-					chemicalReactions.push_back(chemicalCompounds[index]);
-					flag = true;
-					isPossible = true;
-					isPreviousPossible = isPossible;
-					break;
-				}
-			}
-			if (flag)
-				break;
-		}
-		
-		
-		
-		if (isPossible)
-		{
-			mixCount++;
-			isOnBowl = true;
-		}
+		chemicalReactions.push_back(chemicalCompounds[index]);
+		mixCount++;
+		isOnBowl = true;
 	}
 	else
 		isOnBowl = false;
@@ -180,21 +250,50 @@ void Render::Draw()
 	if (isOnBowl && mixCount <= 2)
 	{
 
-		//Sets bowl's color to be a mixture of 2 flasks colors'
-		if (isPossible)
-		{
-			
-			bowlColor.a = 255;
-			bowlColor.r = 255 - (sqrt(pow((255 - (bowlColor.r)), 2) + pow((255 - (color[index].r)), 2) / 2));
-			bowlColor.g = 255 - (sqrt(pow((255 - (bowlColor.g)), 2) + pow((255 - (color[index].g)), 2) / 2));
-			bowlColor.b = 255 - (sqrt(pow((255 - (bowlColor.b)), 2) + pow((255 - (color[index].b)), 2) / 2));
-			indexes.push_back(index);
-			textures->RemoveFlask(index);
-			isPossible = true;
-		}
-		
+		bowlColor.a = 255;
+		bowlColor.r = 255 - (sqrt(pow((255 - (bowlColor.r)), 2) + pow((255 - (color[index].r)), 2) / 2));
+		bowlColor.g = 255 - (sqrt(pow((255 - (bowlColor.g)), 2) + pow((255 - (color[index].g)), 2) / 2));
+		bowlColor.b = 255 - (sqrt(pow((255 - (bowlColor.b)), 2) + pow((255 - (color[index].b)), 2) / 2));
+		indexes.push_back(index);
+		textures->RemoveFlask(index);
+
 	}
 
+	if (mixCount > 2)
+		mixCount = 2;
+
+	
+	if (!tryOn)
+		SubjectIdle(textures->subjectIdle, 7);
+
+	else 
+	{	if(!isCleared)
+		
+		if ((chemicalReactions[0] == "H2O" && chemicalReactions[1] == "Cr(OH)3") || (chemicalReactions[1] == "H2O" && chemicalReactions[0] == "Cr(OH)3"))
+		{
+			SubjectCancer(textures->subjectCancer, 10);
+			stats = "-Subject has contained cancer \n-White cells have been destroyed by cancer cells";
+		}
+		else if ((chemicalReactions[0] == "Na" && chemicalReactions[1] == "H2O") || (chemicalReactions[1] == "Na" && chemicalReactions[0] == "H2O"))
+		{
+			SubjectBurn(textures->subjectBurn, 7);
+			stats = "-Subject has been exposed to 2nd degree burns \n-White cells have not been damaged";
+		}
+		else if ((chemicalReactions[0] == "U" && chemicalReactions[1] == "Fe") || (chemicalReactions[1] == "U" && chemicalReactions[0] == "Fe") || (chemicalReactions[0] == "U" && chemicalReactions[1] == "H2O") || (chemicalReactions[1] == "U" && chemicalReactions[0] == "H2O"))
+		{
+			SubjectToxic(textures->subjectToxic, 37);
+			stats = "-Subject has been exposed to radioactive chemicals \n-White cells have been destroyed completely";
+		}
+		else
+		{
+			SubjectIdle(textures->subjectIdle, 7);
+			stats = "-Subject has not experienced any negative changes \n-White cells are still intact";
+		}
+	}
+	
+	
+	
+	DrawTexture(textures->glass, 0, 0, WHITE);
 	
 	DrawCircleSector(center, 81.0f, 270.0f, 450.0f, (int)20.0f, bowlColor);
 
@@ -213,34 +312,56 @@ void Render::Draw()
 	bookColor = input->getColor(450, 685);
 	DrawTexture(textures->book, 450, 685, bookColor);
 
-
 	DrawTexture(textures->shadows, 0, 0, WHITE);
+	if (mixCount == 2)
+	{
+		TryChemicalReaction(textures->tryButton, tryOn, chemicalReactions);
+		
+	}
+
 	SubjectStats(stats);
-	CellsUnderMicroscope(textures->cells);
+
+	if (!tryOn)
+		CellsUnderMicroscope(textures->cells, true);
+	else
+	{
+		if ((chemicalReactions[0] == "H2O" && chemicalReactions[1] == "Cr(OH)3") || (chemicalReactions[1] == "H2O" && chemicalReactions[0] == "Cr(OH)3"))
+			CellsUnderMicroscope(textures->cancerCells, false);
+
+		else if ((chemicalReactions[0] == "U" && chemicalReactions[1] == "Fe") || (chemicalReactions[1] == "U" && chemicalReactions[0] == "Fe"))
+			CellsUnderMicroscope(textures->toxicCells, false);
+
+		else
+			CellsUnderMicroscope(textures->cells, true);
+	}
 	
-	
-	
-	TryChemicalReaction(textures->tryButton);
-	DrawRectangle(100, 100, 100, 100, BLUE);
-	
+	Reset(textures->resetButton);
 
 	if (CheckCollisionPointRec(GetMousePosition(), { 450, 685, 100, 120 }) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 		isBookOpened = true;
-	if (CheckCollisionPointRec(GetMousePosition(), { 600, 105, 40, 40 }) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-		isBookOpened = false;
+	
 
-	if (IsKeyPressed(KEY_W))
+	if (IsKeyPressed(KEY_LEFT))
 		pageIndex--;
-	if (IsKeyPressed(KEY_S))
+
+	if (IsKeyPressed(KEY_RIGHT))
 		pageIndex++;
+
 	if (pageIndex < 0)
-		pageIndex = 2; // gotta change this!!!!!!
-	if (pageIndex > 2) // this too
+		pageIndex = 9; 
+	
+	if (pageIndex > 9)
 		pageIndex = 0; 
 
 	if (isBookOpened)
-		textures->BookOpened(pageIndex);
-		
+	{
+		DrawGuideBook(textures->pages, pageIndex);
+		DrawTexture(textures->closeX, 950, 120, BLACK);
+
+		if (CheckCollisionPointRec(GetMousePosition(), { 950, 120, 25, 25 }) && IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			isBookOpened = false;
+	}
+
 }
 
 void Render::UnloadTextures()

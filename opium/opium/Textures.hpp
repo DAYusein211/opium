@@ -3,8 +3,8 @@ class Textures
 {
 public:
 	
-	Texture2D flaskHolder, book, room, shadows, bowl, playButton, cells, tryButton;
-	std::vector<Texture2D> flasks, pages;
+	Texture2D closeX, pages, flaskHolder, book, room, shadows, bowl, playButton, resetButton, exitButton, cells, cancerCells, toxicCells, tryButton, subjectIdle, subjectCancer,subjectToxic, subjectBurn, glass;
+	std::vector<Texture2D> flasks;
 	float flaskPositionX[10];
 	std::vector<float> HolderPositionX;
 
@@ -18,9 +18,6 @@ public:
 
 	//Initialises game textures
 	void InitialiseTextures();
-
-	//Renders guide book
-	void BookOpened(int index);
 
 	//Removes used flasks
 	void RemoveFlask(int index);

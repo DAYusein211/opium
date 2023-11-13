@@ -1,5 +1,6 @@
 
 #include "InputHandler.hpp"
+
 namespace userActions
 {
 	bool isDragActive = false, drop = false;
@@ -21,10 +22,6 @@ void InputHandler::Move(float& pointX, float& pointY, float& destinationX, float
 	std::cout << pointX << ", " << pointY << " -> " << destinationX << ", " << destinationY << std::endl;
 	
 }
-
-
-
-	
 
 void InputHandler::DragAndDrop(float& flaskPositionX, float& flaskPositionY,Texture2D flask, Vector2 firstPosition, bool& isEquipped, bool& isDropped)
 {
