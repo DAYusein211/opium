@@ -28,7 +28,7 @@
 
 ## 🃏 Demo of the project
 <p align="center">
-<img src="https://media.discordapp.net/attachments/941317645700055061/1172943568386654208/300A933F-286F-448C-8C1D-3D6A9B3A021E_2.JPG?ex=656227d2&is=654fb2d2&hm=2ae07a35b477584d1ca262be29c7fc81b4d0e6e050141b5b5df48ce7eb7ef070&=&width=1636&height=906" width = "1500px" >
+<img src="https://cdn.discordapp.com/attachments/933732302041808967/1173459913863864480/image.png?ex=656408b5&is=655193b5&hm=d5712a507657d1821af8416a13050ed7bb007d6caa5ed41a8d6af64544cd5891&" width = "1500px" >
 </p>
   
 ## ⚙ Installation
